@@ -10,4 +10,9 @@ class ApplicationFilter extends QueryFilter
             $applications->where('type', $planType);
         });
     }
+
+    public function state($value)
+    {
+        return $this->builder->where('state', $value);
+    }
 }

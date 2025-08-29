@@ -9,12 +9,8 @@ abstract class QueryFilter
 {
 
     protected $builder;
-    protected $request;
 
-    public function __construct(Request $request)
-    {
-        $this->request = $request;
-    }
+    public function __construct(protected Request $request) {}
 
     /**
      * Applies filters by matching request parameters to methods in the filter class and updating the query.
