@@ -20,10 +20,10 @@ class ApplicationFactory extends Factory
     public function definition()
     {
         return [
-            'status' => ApplicationStatus::Prelim,
+            'status' => $this->faker->randomElement([ApplicationStatus::Prelim,ApplicationStatus::Order]),
             'customer_id' => Customer::factory(),
             'plan_id' => Plan::factory(),
-            'address_1' => $this->faker->sentence(1),
+            'address_1' => $this->faker->streetAddress,
             'address_2' => rand(0, 1) > 0.8 ? $this->faker->sentence(1) : null,
             'city' => $this->faker->randomElement(['Sydney', 'Melbourne', 'Brisbane', 'Adelaide', 'Perth', 'Canberra', 'Hobart', 'Darwin', 'Geelong']),
             'state' => $this->faker->randomElement(['NSW', 'VIC', 'QLD', 'TAS', 'SA', 'WA', 'NT', 'ACT']),
