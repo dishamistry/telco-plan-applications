@@ -5,6 +5,7 @@ namespace App\Http\Filters;
 class ApplicationFilter extends QueryFilter
 {
     protected array $filters = ['plan_type', 'state'];
+    protected array $sortable = ['created_at'];
 
     public function plan_type($planType)
     {

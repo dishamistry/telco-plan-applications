@@ -16,6 +16,7 @@ abstract class QueryFilter
      * List of allowed filters
      */
     protected array $filters = [];
+    protected array $sortable = [];
 
     /**
      * Applies filters by matching request parameters to methods in the filter class and updating the query.
@@ -29,7 +30,22 @@ abstract class QueryFilter
                 $this->$filterName($filterValue);
             }
         }
+        $this->sort();
 
         return $builder;
+    }
+
+    protected function sort()
+    {
+        $defaultSortBy = 'created_at';
+        $defaultSortOrder = 'asc';
+
+        $sortBy = $this->request->query('sort_by', $defaultSortBy);
+        $sortOrder = strtolower($this->request->query('sort_order', $defaultSortOrder));
+
+        $sortBy = in_array($sortBy, $this->sortable, true) ? $sortBy : $defaultSortBy;
+        $sortOrder = in_array($sortOrder, ['asc', 'desc'], true) ? $sortOrder : $defaultSortOrder;
+
+        return $this->builder->orderBy($sortBy, $sortOrder);
     }
 }
