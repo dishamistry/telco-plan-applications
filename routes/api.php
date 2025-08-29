@@ -18,6 +18,4 @@ use App\Http\Controllers\ApplicationController;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
-Route::
-// middleware('auth:sanctum')->
-get('/applications', [ApplicationController::class, 'index'])->name('applications.index');
+Route::middleware('auth:sanctum')->get('/applications', [ApplicationController::class, 'index'])->name('applications.index');
