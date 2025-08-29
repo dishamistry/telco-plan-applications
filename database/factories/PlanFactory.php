@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Enums\PlanType;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -16,9 +17,13 @@ class PlanFactory extends Factory
      */
     public function definition()
     {
+        $type = $this->faker->randomElement(PlanType::values());
+        $plans = ['Basic', 'Standard', 'Premium', 'Unlimited', 'Family', 'Business', 'Starter', 'Pro', 'Ultra'];
+        $plan = ucfirst($type) . ' ' . $this->faker->randomElement($plans) . ' Plan';
+
         return [
-            'name' => $this->faker->sentence(rand(1, 3)),
-            'type' => $this->faker->randomElement(['nbn', 'opticomm', 'mobile']),
+            'name' => $plan,
+            'type' => $type,
             'monthly_cost' => $this->faker->numerify('####'),
         ];
     }

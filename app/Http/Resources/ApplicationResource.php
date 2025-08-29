@@ -17,12 +17,12 @@ class ApplicationResource extends JsonResource
     {
         return [
              'id' => $this->id,
-             'customer_full_name' => $this->customer->first_name . ' ' . $this->customer->last_name,
-             'address' => $this->address_1 . ($this->address_2 ? ', ' . $this->address_2 : '') . ', ' . $this->city . ', ' . $this->state . ' ' . $this->postcode,
+             'customer_full_name' => $this->customer?->first_name . ' ' . $this->customer?->last_name,
+             'address' => $this->full_address,
              'plan_type' => $this->plan->type,
              'plan_name' => $this->plan->name,
              'state' => $this->state,
-             'monthly_cost' => number_format($this->plan->monthly_cost / 100, 2),
+             'monthly_cost' => $this->plan->monthly_cost_in_dollars,
              'order_id' => $this->when($this->status === ApplicationStatus::Complete, $this->order_id)
          ];
     }

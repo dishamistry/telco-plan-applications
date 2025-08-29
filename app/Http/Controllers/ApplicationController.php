@@ -16,11 +16,15 @@ class ApplicationController extends Controller
         $sortOrder = $request->query('sort_order', 'asc');
 
         $paginatedApplications = Application::with(['customer', 'plan'])
-        ->when($request->has('plan_type'), function ($applications) use ($planType) {
-            $applications->whereHas('plan', function ($plan) use ($planType) {
-                $plan->where('type', $planType);
-            });
-        })
+        ->when(
+            $request->has('plan_type'),
+            fn ($applications) =>
+            $applications->whereHas(
+                'plan',
+                fn ($plan) =>
+                $plan->where('type', $planType)
+            )
+        )
         ->orderBy($sortBy, $sortOrder)
         ->paginate($perPage);
 
