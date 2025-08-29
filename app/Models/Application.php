@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use App\Enums\ApplicationStatus;
-use App\Events\ApplicationCreated;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -19,8 +18,9 @@ class Application extends Model
         'status' => ApplicationStatus::class,
     ];
 
-    protected $dispatchesEvents = [
-        'created' => ApplicationCreated::class,
+    protected $fillable = [
+        'status',
+        'order_id'
     ];
 
     /**

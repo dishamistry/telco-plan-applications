@@ -2,8 +2,9 @@
 
 namespace Tests\Unit;
 
+use App\Enums\ApplicationStatus;
 use App\Models\Application;
-use Tests\TestCase;
+use PHPUnit\Framework\TestCase;
 
 class ApplicationTest extends TestCase
 {
@@ -15,17 +16,18 @@ class ApplicationTest extends TestCase
         $this->assertTrue(true);
     }
 
-    public function test_full_address_combines_fields_correctly()
+    public function it_combines_address_fields_into_formatted_full_address()
     {
         $app = new Application([
-            'address_1' => '4 Quality Dr',
+            'address_1' => '180 St Kilda Rd',
             'address_2' => null,
-            'city' => 'Dandenong South',
+            'city' => 'Melbourne',
             'state' => 'VIC',
-            'postcode' => '3175',
+            'postcode' => '3006',
         ]);
+        
         $this->assertEquals(
-            '4 Quality Dr, Dandenong South, VIC, 3175',
+            '180 St Kilda Rd, Melbourne VIC 3006',
             $app->full_address
         );
     }

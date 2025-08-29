@@ -14,10 +14,10 @@ class PlanTest extends TestCase
     {
         $this->assertTrue(true);
     }
-    /** @test */
-    public function plan_monthly_cost_is_formatted_to_dollars()
+
+    public function it_converts_monthly_cost_from_cents_to_dollars()
     {
-        $plan = new Plan(['monthly_cost' => 1234]);
+        $plan = new Plan(['monthly_cost' => 1234]); // 12345 cents = 123.45 dollars
 
         $this->assertEquals('12.34', $plan->monthly_cost_in_dollars);
     }
