@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Builder;
+use App\Http\Filters\QueryFilter;
 
 class Application extends Model
 {
@@ -53,5 +55,13 @@ class Application extends Model
                 ->filter()
                 ->implode(', ')
         );
+    }
+
+    /**
+     * Scope a query to filter applications based on query parameters
+     */
+    public function scopeFilter(Builder $builder, QueryFilter $filters)
+    {
+        return $filters->apply($builder);
     }
 }

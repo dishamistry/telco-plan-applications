@@ -6,6 +6,7 @@ use Tests\TestCase;
 use App\Models\Application;
 use App\Models\Plan;
 use App\Enums\ApplicationStatus;
+use App\Enums\PlanType;
 
 class ApplicationListingTest extends TestCase
 {
@@ -147,7 +148,7 @@ class ApplicationListingTest extends TestCase
         $response->assertStatus(422);
         $response->assertJsonValidationErrors(['plan_type']);        
         $response->assertJsonFragment([
-            'plan_type' => ['The plan type must be one of: ' . implode(', ', ['nbn', 'opticomm', 'mobile'])]
+            'plan_type' => ['The plan type must be one of: ' . implode(', ', PlanType::values())]
         ]);
     }
 
