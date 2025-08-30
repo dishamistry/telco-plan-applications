@@ -58,7 +58,7 @@ class ProcessNbnOrderJob implements ShouldQueue
 
     private function getFakeB2BResponse(): array
     {
-        $filename = $this->application->id % 2 === 0 ? 'nbn-successful-response.json' : 'nbn-fail-response.json';
+        $filename = $this->application->id % 2 === 0 ? 'successful-response.json' : 'fail-response.json';
         $path = base_path("tests/stubs/{$filename}");
         return json_decode(File::get($path), true);
     }

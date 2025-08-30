@@ -2,6 +2,8 @@
 
 namespace App\Console\Commands;
 
+use App\Enums\ApplicationStatus;
+use App\Enums\PlanType;
 use App\Jobs\ProcessNbnOrderJob;
 use App\Models\Application;
 use Illuminate\Console\Command;
@@ -29,9 +31,9 @@ class DispatchNbnOrders extends Command
      */
     public function handle()
     {
-        $applications = Application::where('status', 'order')
+        $applications = Application::where('status', ApplicationStatus::Order)
             ->whereHas('plan', function ($query) {
-                $query->where('type', 'nbn');
+                $query->where('type', PlanType::NBN);
             })->get();
 
         foreach ($applications as $application) {
