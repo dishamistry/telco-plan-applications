@@ -18,8 +18,8 @@ class ProcessNbnOrderJobTest extends TestCase
     public function setUp(): void
     {
         parent::setUp();
-        $this->successResponse = $this->loadStub('nbn-successful-response.json');
-        $this->failResponse = $this->loadStub('nbn-fail-response.json');
+        $this->successResponse = $this->loadStub('successful-response.json');
+        $this->failResponse = $this->loadStub('fail-response.json');
     }
 
     private function loadStub(string $filename): array
